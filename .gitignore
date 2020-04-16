@@ -26,5 +26,5 @@
 
 ### VS Code ###
 .vscode/
-/artisan-product/product-common/target/classes/com/artisan/product/common/*.class
+/dt-product/product-common/target/classes/com/dt/product/common/*.class
 target

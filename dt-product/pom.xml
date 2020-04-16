@@ -4,11 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dt</groupId>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>dt-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka-server</name>
-    <description>eureka server</description>
-
+    <modules>
+        <module>product-server</module>
+        <module>product-client</module>
+        <module>product-common</module>
+    </modules>
+    <packaging>pom</packaging>
+    <name>dt-product</name>
+    <description>Product</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,38 +24,51 @@
 
 
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-   </properties>
+        <productcommon.version>0.0.1-SNAPSHOT</productcommon.version>
+        <springcloud.version>Finchley.RELEASE</springcloud.version>
+        <mysql.driver.version>8.0.11</mysql.driver.version>
+        <oracle.driver.version>10.2.0.4.0</oracle.driver.version>
+        <druid.version>1.0.29</druid.version>
+    </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-    </dependencies>
 
+    <!-- 凡是版本的定义，都建议放在最外层的dependencyManagement中，方便做到统一管理 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>${springcloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- product-server和product-client都需要依赖该模块，
+            在这里定义版本之后，在server和client模块引用的话就无需再加上version了，方便统一管理 -->
+            <dependency>
+                <groupId>com.dt</groupId>
+                <artifactId>product-common</artifactId>
+                <version>${productcommon.version}</version>
+            </dependency>
+
+            <!--Dao Start -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.driver.version}</version>
+                <scope>runtime</scope> <!--保留 -->
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
     <repositories>
         <repository>
             <id>aliyun</id>
@@ -69,4 +87,5 @@
             </snapshots>
         </repository>
     </repositories>
+
 </project>
