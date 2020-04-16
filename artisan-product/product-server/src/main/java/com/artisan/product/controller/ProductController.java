@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * 商品对外接口
+ * @author tyler.yan
+ */
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -27,34 +32,32 @@ public class ProductController {
     @Autowired
     private ProductCategoryService categoryService;
 
-
     @GetMapping("/list")
     private Result list() {
-
         //1. 查询所有在架的商品
-        List<Product> productInfoList = productService.getAllUpProduct();
+        List<Product> products = productService.list();
 
         //2. 获取类目type列表
-        List<Integer> categoryTypeList = productInfoList.stream()
+        List<Integer> typeList = products.stream()
                 .map(Product::getCategoryType)
                 .collect(Collectors.toList());
 
         //3. 从数据库查询类目
-        List<ProductCategory> categoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
+        List<ProductCategory> categoryList = categoryService.listByType(typeList);
 
         //4. 构造数据
         List<ProductVO> productVOList = new ArrayList<>();
-        for (ProductCategory productCategory : categoryList) {
+        for (ProductCategory category : categoryList) {
             ProductVO productVO = new ProductVO();
             // 设置属性
-            productVO.setCategoryName(productCategory.getCategoryName());
-            productVO.setCategoryType(productCategory.getCategoryType());
+            productVO.setCategoryName(category.getCategoryName());
+            productVO.setCategoryType(category.getCategoryType());
 
             // ProductInfoVO 集合
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
-            for (Product product : productInfoList) {
+            for (Product product : products) {
                 // 挂到对应的的categoryType下
-                if (product.getCategoryType().equals(productCategory.getCategoryType())) {
+                if (product.getCategoryType().equals(category.getCategoryType())) {
                     ProductInfoVO productInfoVO = new ProductInfoVO();
                     // 将属性copy到productInfoVO，避免逐个属性set，更简洁
                     BeanUtils.copyProperties(product, productInfoVO);
@@ -68,17 +71,16 @@ public class ProductController {
         return Result.success(productVOList);
     }
 
-
     /**
      * 根据productIdList 查询商品列表
      * 提供给Order微服务用
      *
-     * @param productIdList
+     * @param ids
      * @return
      */
     @PostMapping("/productListForOrder")
-    private List<ProductOutput> getProductForOrder(@RequestBody List<String> productIdList) {
-        return productService.getProductList(productIdList);
+    private List<ProductOutput> getProductForOrder(@RequestBody List<String> ids) {
+        return productService.list(ids);
     }
 
 

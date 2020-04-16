@@ -1,3 +1,5 @@
-# springcloud-o2o
+# spring-cloud-o2o
 
-spring cloud 实战项目
+Spring-Cloud微服务实战工程Demo
+Fork from https://github.com/yangshangwei/springcloud-o2o
+

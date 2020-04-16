@@ -10,21 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>product-client</artifactId>
-
+    <description>商品FeignClient</description>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>com.artisan</groupId>
             <artifactId>product-common</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

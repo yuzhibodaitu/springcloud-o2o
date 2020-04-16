@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ProductStatusEnum {
 
-    UP(0,"上架"),
-    DOWN(1,"下架");
+    OnLine(0,"上架"),
+    OffLine(1,"下架");
 
     private int code ;
     private String msg;

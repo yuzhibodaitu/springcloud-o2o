@@ -46,5 +46,22 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>oss-public</id>
+            <url>https://oss.sonatype.org/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>snapshot</id>
+            <name>mp-snapshot</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

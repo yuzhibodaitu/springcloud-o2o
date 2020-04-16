@@ -2,6 +2,9 @@ package com.artisan.product.vo;
 
 import lombok.Getter;
 
+/**
+ * @author tyler.yan
+ */
 @Getter
 public class Result<T> {
 
@@ -16,8 +19,6 @@ public class Result<T> {
         return new  Result<T>(data);
     }
 
-
-
     private Result(T data) {
         this.code = 0;
         this.msg = "success";
@@ -31,7 +32,6 @@ public class Result<T> {
     public static <T> Result<T> error(ErrorCodeMsg cm){
         return new  Result<T>(cm);
     }
-
 
     private Result(ErrorCodeMsg cm) {
         if(cm == null) {

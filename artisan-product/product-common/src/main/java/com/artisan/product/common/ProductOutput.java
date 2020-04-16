@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * 商品返回结果
+ * @author tyler.yan
+ */
 @Data
 public class ProductOutput {
 

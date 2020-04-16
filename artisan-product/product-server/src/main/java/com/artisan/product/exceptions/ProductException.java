@@ -2,6 +2,9 @@ package com.artisan.product.exceptions;
 
 import com.artisan.product.enums.ResultEnum;
 
+/**
+ * @author tyler.yan
+ */
 public class ProductException extends RuntimeException {
 
     private Integer code ;

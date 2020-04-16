@@ -25,7 +25,7 @@ public class ProductServiceTest extends ArtisanProductApplicationTests {
 
     @Test
     public void getAllUpProduct() {
-        List<Product> list =  productRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
+        List<Product> list =  productRepository.findByProductStatus(ProductStatusEnum.OnLine.getCode());
         Assert.assertEquals(3,list.size());
     }
 

@@ -10,9 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>product-server</artifactId>
-
-
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -43,6 +40,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
         </dependency>
 
         <dependency>
@@ -62,10 +60,19 @@
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
+        <!-- 这个项目使用的是原生的amqp-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+    <!-- TODO: 切换到SpringCloud封装好的MQ中
+    参考稳藏：https://www.jianshu.com/p/c0cba2546900
+    -->
+        <!--用springcloud封裝好的方式使用rabbitmq，而不是直接使用spring-boot-starter-amqp-->
+   <!--     <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>-->
 
         <dependency>
             <groupId>com.google.code.gson</groupId>

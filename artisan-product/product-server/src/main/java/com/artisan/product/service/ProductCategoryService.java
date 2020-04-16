@@ -4,7 +4,16 @@ import com.artisan.product.domain.ProductCategory;
 
 import java.util.List;
 
+/**
+ * 商品类别查询
+ * @author tyler.yan
+ */
 public interface ProductCategoryService {
 
-    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
+    /**
+     * 批量查询商品列表
+     * @param typeList 类目标号
+     * @return ProductCategory 商品类目
+     */
+    List<ProductCategory> listByType(List<Integer> typeList);
 }
