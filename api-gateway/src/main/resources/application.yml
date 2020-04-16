@@ -1,25 +1,29 @@
+server:
+  port: 4500
+  host: localhost
+
 spring:
   application:
     name: api-gateway
+  profiles:
+    active: dev
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
   cloud:
     config:
       discovery:
         enabled: true
         service-id: CONFIG
       profile: dev
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 10MB
+
 zuul:
   routes:
-  # /myProduct/product/list -> /product/product/list
-    aaaaaa:
-      path: /myProduct/**
-      serviceId: product
-      sensitiveHeaders:
-  #简洁写法
-#    product: /myProduct/**
+    api-provider-product: /open-product/**
   #排除某些路由
   ignored-patterns:
     - /**/product/listForOrder

@@ -1,0 +1,19 @@
+#unix based dev environment
+daitu:
+  logging:
+    level: info
+    file: /home/cloud/logs/cloud-${spring.application.name}-${server.host}-${server.port}
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+  #自定义服务的Instance ID
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+#链路跟踪zipkinServer
+spring:
+  sleuth:
+    sampler:
+      percentage: 0.1

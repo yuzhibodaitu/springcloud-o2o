@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--文件输出格式-->
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS}-|-%-5level-|-%thread-|-%c[%L]-|-%msg%n" />
+    <property name="ALERT_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS},%msg%n"></property>
+
+    <!--读取springroot配置项-->
+    <!--日志默认输出级别-->
+    <springProperty name="LEVEL" scope="context" source="daitu.logging.level"/>
+    <!--日志存放路径及文件名-->
+    <springProperty name="FILE_NAME" scope="context" source="daitu.logging.file"/>
+
+    <!--控制台日志-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--INFO日志文件-->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件名称 -->
+        <file>${FILE_NAME}-info.log</file>
+        <!--过滤日志级别-->
+        <!-- 过滤日志级别 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--历史文件命名规则-->
+            <fileNamePattern>${FILE_NAME}-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <!--输出格式-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!--ERROR日志文件-->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_NAME}-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_NAME}-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!--系统日志文件-->
+    <appender name="SYS_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_NAME}-sys.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_NAME}-sys.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!-- addtivity:是否向上级loger传递打印信息。默认是true。-->
+    <!-- <loger>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。-->
+    <!-- name:用来指定受此loger约束的某一个包或者具体的某一个类。-->
+    <logger name="com.quna" level="${LEVEL}" additivity="false">
+        <appender-ref ref="INFO_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </logger>
+
+    <logger name="org.springframework" level="WARN"/>
+
+    <!--顶级logger 不打印additivity=false的下级logger日志-->
+    <root level="${LEVEL}">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="SYS_FILE" />
+    </root>
+</configuration>

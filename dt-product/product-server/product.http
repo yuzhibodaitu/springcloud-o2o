@@ -1,0 +1,16 @@
+### 直接访问接口列表
+GET http://localhost:8080/product/list
+Accept: application/json
+
+###
+### 访问zuul代理列表
+GET http://localhost:4500/api-provider-product/product/list?token=1
+Accept: application/json
+
+###
+
+### 访问zuul路由代理列表
+GET http://localhost:4500/open-product/product/list?token=1
+Accept: application/json
+
+###

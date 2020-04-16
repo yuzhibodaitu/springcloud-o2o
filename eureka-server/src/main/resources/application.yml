@@ -16,6 +16,6 @@ eureka:
     # 因为我们这里目前是个单节点的Eureka Server ,不需要与其他的Eureka Server节点的数据，因此设为false
     fetch-registry: false
     # 置与Eureka Server交互的地址，查询服务和注册服务都依赖这个地址。
-    # 默认为 http://localhost:8761/eureka ，多个地址可使用 , 分隔
+    # 默认为 http://localhost:8762/eureka ，多个地址可使用 , 分隔
     service-url:
       defaultZone: http://localhost:8762/eureka
