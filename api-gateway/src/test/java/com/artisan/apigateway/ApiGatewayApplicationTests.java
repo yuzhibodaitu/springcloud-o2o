@@ -1,4 +1,4 @@
-package com.artisan.apigateway;
+package com.dt.apigateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
