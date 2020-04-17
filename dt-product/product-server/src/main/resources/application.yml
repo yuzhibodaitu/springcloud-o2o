@@ -17,20 +17,20 @@ spring:
       #ddl-auto: update 自动创建|更新|验证数据库表结构
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-  cloud:
-    config:
-      profile: dev
-      # 可配置多个,不推荐使用,因为需要设置具体的ip.服务端修改或者新增IP后,要同步修改
-      # uri: http://localhost:9898/,http://localhost:9999/
-      discovery:
-        # 指定Config Server在服务发现中的service Id ,默认为configserver
-        service-id: ARTISAN-CONFIG
-        # 表示使用服务发现组件中的Config Server,而不自己指定Config Server的uri,默认为false
-        enabled: true
-    # 修复github webhook 只能刷新config server 无法刷新config client的问题
-    bus:
-      #Workaround for defect in https://github.com/spring-cloud/spring-cloud-bus/issues/124
-      id: ${vcap.application.name:${spring.application.name:application}}:${vcap.application.instance_index:${spring.cloud.config.profile:${local.server.port:${server.port:0}}}}:${vcap.application.instance_id:${random.value}}
+#  cloud:
+#    config:
+#      profile: dev
+#      # 可配置多个,不推荐使用,因为需要设置具体的ip.服务端修改或者新增IP后,要同步修改
+#      # uri: http://localhost:9898/,http://localhost:9999/
+#      discovery:
+#        # 指定Config Server在服务发现中的service Id ,默认为configserver
+#        service-id: ARTISAN-CONFIG
+#        # 表示使用服务发现组件中的Config Server,而不自己指定Config Server的uri,默认为false
+#        enabled: true
+#    # 修复github webhook 只能刷新config server 无法刷新config client的问题
+#    bus:
+#      #Workaround for defect in https://github.com/spring-cloud/spring-cloud-bus/issues/124
+#      id: ${vcap.application.name:${spring.application.name:application}}:${vcap.application.instance_index:${spring.cloud.config.profile:${local.server.port:${server.port:0}}}}:${vcap.application.instance_id:${random.value}}
 
  ## 参考 https://www.jianshu.com/p/c0cba2546900
   rabbitmq:

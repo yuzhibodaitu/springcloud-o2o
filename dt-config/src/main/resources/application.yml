@@ -1,5 +1,5 @@
 server:
-  port: 7070
+  port: 8888
 spring:
   application:
     name: dt-config  #应用名称

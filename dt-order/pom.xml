@@ -15,9 +15,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dt</groupId>
-    <artifactId>dt_order</artifactId>
+    <artifactId>dt-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dt_order</name>
+    <name>dt-order</name>
     <description>Order</description>
 
     <properties>
@@ -26,6 +26,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <springcloud.version>Finchley.RELEASE</springcloud.version>
         <product-client.version>0.0.1-SNAPSHOT</product-client.version>
+        <mysql.driver.version>8.0.11</mysql.driver.version>
+        <oracle.driver.version>10.2.0.4.0</oracle.driver.version>
+        <druid.version>1.0.29</druid.version>
     </properties>
 
 

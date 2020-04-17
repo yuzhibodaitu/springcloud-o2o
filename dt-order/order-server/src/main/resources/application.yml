@@ -1,12 +1,36 @@
+server:
+  port: 8081
+
 spring:
-  cloud:
-    stream:
-      bindings:
-        # MyMsgInput 自定义   order消费组
-        MyMsgInput:
-          # 消息组的名称
-          group: order
-          #输入通道的主题名
-          destination: MyMsgInput
-          #存在消息队列中的消息，如果是复杂对象，则以JSON的形式展示
-          content-type: application/json
+  application:
+    name: api-provider-order
+
+  # datasource
+  datasource:
+    url: jdbc:mysql://localhost:3306/dt_o2o_order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #jpa
+  jpa:
+    show-sql: true
+# Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+#  cloud:
+#    config:
+#      #      profile: dev
+#      # 可配置多个,不推荐使用,因为需要设置具体的ip.服务端修改或者新增IP后,要同步修改
+#      # uri: http://localhost:9898/,http://localhost:9999/
+#      discovery:
+#        # 指定Config Server在服务发现中的service Id ,默认为configserver
+#        service-id: DT-CONFIG
+#        # 表示使用服务发现组件中的Config Server,而不自己指定Config Server的uri,默认为false
+#        enabled: false
+#      profile: dev
+#    # 修复github webhook 只能刷新config server 无法刷新config client的问题
+#    bus:
+#      #Workaround for defect in https://github.com/spring-cloud/spring-cloud-bus/issues/124
+#      id: ${vcap.application.name:${spring.application.name:application}}:${vcap.application.instance_index:${spring.cloud.config.profile:${local.server.port:${server.port:0}}}}:${vcap.application.instance_id:${random.value}}
