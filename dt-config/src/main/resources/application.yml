@@ -12,8 +12,12 @@ spring:
           password: gitlab  #登录密码
           default-label: master #配置文件分支
           search-paths: dt-o2o-config  #配置文件所在根目录
-          basedir: C:\data\07-github\spring-cloud-config-center
+          basedir: C:\data\07-github\spring-cloud-config-center-localcache
           force-pull: true
+          ##
+          ##Cannot pull from remote the working tree is not clean. 这种报错可以通过配置强制拉属性force-pull: true 。 由于Spring Cloud配置服务器会复制远程git存储库，如果本地副本变得不干净，那么Spring Cloud配置服务器就不能更新远程存储库中的本地副本。通过设置强制拉属性为true，使Spring Cloud配置服务器从远程存储库中强制pull。
+          ##官方指导： https://github.com/spring-cloud/spring-cloud-config/blob/master/docs/src/main/asciidoc/spring-cloud-config.adoc#force-pull-in-git-repositories
+
   rabbitmq:
     host: localhost
     username: guest

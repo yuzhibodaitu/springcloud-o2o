@@ -1,0 +1,56 @@
+### 通过order服务的接口访问product服务的接口
+GET http://localhost:8081/api-provider-order/getServerInfoFromClient
+Accept: application/json
+
+
+### 通过zuul order服务的接口访问product服务的接口
+GET http://localhost:4500/api-provider-order/getServerInfoFromClient
+Accept: application/json
+
+###
+### 访问zuul代理列表
+GET http://localhost:4500/api-provider-product/product/list?token=1
+Accept: application/json
+
+###
+
+### 访问zuul路由代理列表
+GET http://localhost:4500/open-product/product/list?token=1
+Accept: application/json
+
+
+### 测试获取config中的配置文件
+GET http://localhost:8081/value
+Accept: application/json
+
+
+### 测试获取config中的配置文件
+GET http://localhost:8888/api-provider-order-dev.yml
+Accept: application/xml
+
+### 刷新config配置
+POST http://localhost:8888/actuator/bus-refresh
+Accept: application/xml
+
+
+### 本地orderservice获取productId清单
+GET http://localhost:8081/order/getProductList
+Accept: application/json
+
+###
+
+
+ [{
+      "productId": "1",
+       "productQuantity": 2
+},
+{
+      "productId": "2",
+       "productQuantity": 5
+},
+{
+      "productId": "3",
+       "productQuantity": 10
+}]
+
+###
